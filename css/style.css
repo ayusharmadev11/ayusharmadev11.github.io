@@ -1313,7 +1313,7 @@ footer .credits a {
 
 /* Center image on small screens */
 @media (max-width: 768px) {
-  .about-mf .about-img {
+  .about-mf .about-img img {
     display: block;
     margin: 0 auto;
   }
