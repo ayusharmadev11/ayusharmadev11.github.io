@@ -117,167 +117,167 @@
 })(jQuery);
 
 // Neural network design
-document.addEventListener('DOMContentLoaded', function() {
-	const canvas = document.getElementById('neuralNetworkCanvas');
-	const ctx = canvas.getContext('2d');
+// document.addEventListener('DOMContentLoaded', function() {
+// 	const canvas = document.getElementById('neuralNetworkCanvas');
+// 	const ctx = canvas.getContext('2d');
 
-	// Fix for canvas rendering to make lines sharper
-	function setupHighDPICanvas(canvas) {
-		const dpr = window.devicePixelRatio || 1;
-		const rect = canvas.getBoundingClientRect();
-		canvas.width = rect.width * dpr;
-		canvas.height = rect.height * dpr;
-		ctx.scale(dpr, dpr);
-		canvas.style.width = rect.width + 'px';
-		canvas.style.height = rect.height + 'px';
-		return {width: rect.width, height: rect.height};
-	}
+// 	// Fix for canvas rendering to make lines sharper
+// 	function setupHighDPICanvas(canvas) {
+// 		const dpr = window.devicePixelRatio || 1;
+// 		const rect = canvas.getBoundingClientRect();
+// 		canvas.width = rect.width * dpr;
+// 		canvas.height = rect.height * dpr;
+// 		ctx.scale(dpr, dpr);
+// 		canvas.style.width = rect.width + 'px';
+// 		canvas.style.height = rect.height + 'px';
+// 		return {width: rect.width, height: rect.height};
+// 	}
 
-	let dims = setupHighDPICanvas(canvas);
-	let width = dims.width;
-	let height = dims.height;
+// 	let dims = setupHighDPICanvas(canvas);
+// 	let width = dims.width;
+// 	let height = dims.height;
 
-	// Mouse position
-	let mouse = {
-		x: width / 2,
-		y: height / 2
-	};
+// 	// Mouse position
+// 	let mouse = {
+// 		x: width / 2,
+// 		y: height / 2
+// 	};
 
-	// Track mouse position
-	window.addEventListener('mousemove', function(e) {
-		mouse.x = e.clientX;
-		mouse.y = e.clientY;
-	});
+// 	// Track mouse position
+// 	window.addEventListener('mousemove', function(e) {
+// 		mouse.x = e.clientX;
+// 		mouse.y = e.clientY;
+// 	});
 
-	// For touch devices
-	window.addEventListener('touchmove', function(e) {
-		if (e.touches.length > 0) {
-			mouse.x = e.touches[0].clientX;
-			mouse.y = e.touches[0].clientY;
-		}
-	});
+// 	// For touch devices
+// 	window.addEventListener('touchmove', function(e) {
+// 		if (e.touches.length > 0) {
+// 			mouse.x = e.touches[0].clientX;
+// 			mouse.y = e.touches[0].clientY;
+// 		}
+// 	});
 
-	// Handle window resize
-	window.addEventListener('resize', function() {
-		dims = setupHighDPICanvas(canvas);
-		width = dims.width;
-		height = dims.height;
-		initParticles();
-	});
+// 	// Handle window resize
+// 	window.addEventListener('resize', function() {
+// 		dims = setupHighDPICanvas(canvas);
+// 		width = dims.width;
+// 		height = dims.height;
+// 		initParticles();
+// 	});
 
-	// Particles array
-	let particles = [];
-	// Keep the increased particle count
-	const particleCount = Math.min(180, Math.floor(width * height / 6500));
-	// Keep larger connection distance for base network
-	const maxDistance = 160;
-	// Significantly reduced hover radius
-	const hoverRadius = 80;
-	const nodeRadius = 1.2;
-	const lineColor = 'rgb(255, 255, 255)';
-	const nodeColor = 'rgb(255, 255, 255)';
-	const activeNodeColor = 'rgb(255, 255, 255)';
-	const activeLineColor = 'rgba(255, 255, 255, 0.9)';
+// 	// Particles array
+// 	let particles = [];
+// 	// Keep the increased particle count
+// 	const particleCount = Math.min(180, Math.floor(width * height / 6500));
+// 	// Keep larger connection distance for base network
+// 	const maxDistance = 160;
+// 	// Significantly reduced hover radius
+// 	const hoverRadius = 80;
+// 	const nodeRadius = 1.2;
+// 	const lineColor = 'rgb(255, 255, 255)';
+// 	const nodeColor = 'rgb(255, 255, 255)';
+// 	const activeNodeColor = 'rgb(255, 255, 255)';
+// 	const activeLineColor = 'rgba(255, 255, 255, 0.9)';
 
-	// Particle class
-	class Particle {
-		constructor(x, y) {
-		this.x = x || Math.random() * width;
-		this.y = y || Math.random() * height;
-		this.vx = Math.random() * 0.3 - 0.15;
-		this.vy = Math.random() * 0.3 - 0.15;
-		this.radius = nodeRadius;
-		}
+// 	// Particle class
+// 	class Particle {
+// 		constructor(x, y) {
+// 		this.x = x || Math.random() * width;
+// 		this.y = y || Math.random() * height;
+// 		this.vx = Math.random() * 0.3 - 0.15;
+// 		this.vy = Math.random() * 0.3 - 0.15;
+// 		this.radius = nodeRadius;
+// 		}
 		
-		update() {
-		// Add gentle movement
-		this.x += this.vx;
-		this.y += this.vy;
+// 		update() {
+// 		// Add gentle movement
+// 		this.x += this.vx;
+// 		this.y += this.vy;
 		
-		// Boundary checks
-		if (this.x < 0 || this.x > width) {
-			this.vx = -this.vx;
-		}
+// 		// Boundary checks
+// 		if (this.x < 0 || this.x > width) {
+// 			this.vx = -this.vx;
+// 		}
 		
-		if (this.y < 0 || this.y > height) {
-			this.vy = -this.vy;
-		}
+// 		if (this.y < 0 || this.y > height) {
+// 			this.vy = -this.vy;
+// 		}
 		
-		// Distance from mouse
-		const dx = mouse.x - this.x;
-		const dy = mouse.y - this.y;
-		const distance = Math.sqrt(dx * dx + dy * dy);
+// 		// Distance from mouse
+// 		const dx = mouse.x - this.x;
+// 		const dy = mouse.y - this.y;
+// 		const distance = Math.sqrt(dx * dx + dy * dy);
 		
-		// Draw node
-		ctx.beginPath();
-		ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+// 		// Draw node
+// 		ctx.beginPath();
+// 		ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
 		
-		if (distance < hoverRadius) {
-			ctx.fillStyle = activeNodeColor;
-		} else {
-			ctx.fillStyle = nodeColor;
-		}
+// 		if (distance < hoverRadius) {
+// 			ctx.fillStyle = activeNodeColor;
+// 		} else {
+// 			ctx.fillStyle = nodeColor;
+// 		}
 		
-		ctx.fill();
-		}
-	}
+// 		ctx.fill();
+// 		}
+// 	}
 
-	// Initialize particles
-	function initParticles() {
-		particles = [];
-		for (let i = 0; i < particleCount; i++) {
-		particles.push(new Particle());
-		}
-	}
+// 	// Initialize particles
+// 	function initParticles() {
+// 		particles = [];
+// 		for (let i = 0; i < particleCount; i++) {
+// 		particles.push(new Particle());
+// 		}
+// 	}
 
-	// Animation loop
-	function animate() {
-		ctx.clearRect(0, 0, width * window.devicePixelRatio, height * window.devicePixelRatio);
+// 	// Animation loop
+// 	function animate() {
+// 		ctx.clearRect(0, 0, width * window.devicePixelRatio, height * window.devicePixelRatio);
 		
-		// Draw connections first (behind nodes)
-		for (let i = 0; i < particles.length; i++) {
-		for (let j = i + 1; j < particles.length; j++) {
-			const dx = particles[i].x - particles[j].x;
-			const dy = particles[i].y - particles[j].y;
-			const distance = Math.sqrt(dx * dx + dy * dy);
+// 		// Draw connections first (behind nodes)
+// 		for (let i = 0; i < particles.length; i++) {
+// 		for (let j = i + 1; j < particles.length; j++) {
+// 			const dx = particles[i].x - particles[j].x;
+// 			const dy = particles[i].y - particles[j].y;
+// 			const distance = Math.sqrt(dx * dx + dy * dy);
 			
-			if (distance < maxDistance) {
-			// Check if both particles are near the mouse (stricter condition)
-			const distToMouse1 = Math.hypot(mouse.x - particles[i].x, mouse.y - particles[i].y);
-			const distToMouse2 = Math.hypot(mouse.x - particles[j].x, mouse.y - particles[j].y);
+// 			if (distance < maxDistance) {
+// 			// Check if both particles are near the mouse (stricter condition)
+// 			const distToMouse1 = Math.hypot(mouse.x - particles[i].x, mouse.y - particles[i].y);
+// 			const distToMouse2 = Math.hypot(mouse.x - particles[j].x, mouse.y - particles[j].y);
 			
-			// Only highlight if BOTH nodes are within hover radius (much stricter)
-			const nearMouse = distToMouse1 < hoverRadius && distToMouse2 < hoverRadius;
+// 			// Only highlight if BOTH nodes are within hover radius (much stricter)
+// 			const nearMouse = distToMouse1 < hoverRadius && distToMouse2 < hoverRadius;
 			
-			ctx.beginPath();
-			ctx.moveTo(particles[i].x, particles[i].y);
-			ctx.lineTo(particles[j].x, particles[j].y);
+// 			ctx.beginPath();
+// 			ctx.moveTo(particles[i].x, particles[i].y);
+// 			ctx.lineTo(particles[j].x, particles[j].y);
 			
-			// Opacity based on distance (closer = more opaque)
-			const opacity = 1 - (distance / maxDistance);
+// 			// Opacity based on distance (closer = more opaque)
+// 			const opacity = 1 - (distance / maxDistance);
 			
-			if (nearMouse) {
-				ctx.strokeStyle = activeLineColor;
-			} else {
-				ctx.strokeStyle = `rgba(120, 120, 120, ${opacity * 0.35})`;
-			}
+// 			if (nearMouse) {
+// 				ctx.strokeStyle = activeLineColor;
+// 			} else {
+// 				ctx.strokeStyle = `rgba(120, 120, 120, ${opacity * 0.35})`;
+// 			}
 			
-			// Thinner lines
-			ctx.lineWidth = 0.3;
-			ctx.stroke();
-			}
-		}
-		}
+// 			// Thinner lines
+// 			ctx.lineWidth = 0.3;
+// 			ctx.stroke();
+// 			}
+// 		}
+// 		}
 		
-		// Update and draw particles
-		particles.forEach(particle => {
-		particle.update();
-		});
+// 		// Update and draw particles
+// 		particles.forEach(particle => {
+// 		particle.update();
+// 		});
 		
-		requestAnimationFrame(animate);
-	}
+// 		requestAnimationFrame(animate);
+// 	}
 
-	// Start the animation
-	initParticles();
-	animate();
-});
+// 	// Start the animation
+// 	initParticles();
+// 	animate();
+// });

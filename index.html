@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Ayush Sharma! 👋🏻</title>
+  <title>🧑🏻‍💻🏍️🍽️🥱</title>
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta content="" name="keywords">
   <meta content="" name="description">
@@ -68,7 +68,7 @@
   <!--/ Nav End /-->
 
   <!--/ Intro Skew Star /-->
-  <div id="home" class="intro route">
+  <!-- <div id="home" class="intro route">
     <canvas class="neural-network-canvas" id="neuralNetworkCanvas"></canvas>
     <div class="overlay-itro"></div>
     <div class="intro-content display-table">
@@ -83,7 +83,43 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
+
+  <section id="home">
+      <!-- Custom cursor elements -->
+      <div class="cursor"></div>
+      <div class="cursor-follower"></div>
+      <div class="spotlight"></div>
+      
+      <!-- Background elements -->
+      <div id="particles-js"></div>
+      <canvas id="bg-canvas"></canvas>
+      <div class="vignette"></div>
+      
+      <!-- Animated background shapes -->
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+      
+      <!-- Main content -->
+      <div class="content">
+          <div class="title-card">
+              <h3 class="name">Ayush Sharma</h3>
+              <p class="tagline">Writes code, shoots videos, rides a bike, forgets sleep.</p>
+              
+              <div class="buttons-container">
+                  <a class="nav-button" id="professional-btn" target="_blank" href="https://drive.google.com/file/d/1vLHeaZXGH3EYheF-4ZAqYJPKzqkY3_bO/view?usp=sharing">Resume &#8599;</a>
+                  <a class="nav-button js-scroll" id="personal-btn" href="#contact">Contact ✉️</a>
+              </div>
+          </div>
+      </div>
+      
+      <!-- Glowing orbs -->
+      <div class="orb" style="width: 500px; height: 500px; background: radial-gradient(circle, rgba(96, 76, 255, 0.3) 0%, rgba(96, 76, 255, 0) 70%); top: -20%; left: 10%;"></div>
+      <div class="orb" style="width: 450px; height: 450px; background: radial-gradient(circle, rgba(58, 220, 255, 0.3) 0%, rgba(58, 220, 255, 0) 70%); bottom: -10%; right: 15%;"></div>
+      <div class="orb" style="width: 380px; height: 380px; background: radial-gradient(circle, rgba(172, 58, 255, 0.3) 0%, rgba(172, 58, 255, 0) 70%); top: 40%; right: 30%;"></div>
+      <div class="orb" style="width: 420px; height: 420px; background: radial-gradient(circle, rgba(255, 105, 180, 0.3) 0%, rgba(255, 105, 180, 0) 70%); bottom: 20%; left: 20%;"></div>
+  </section>
   <!--/ Intro Skew End /-->
 
   <section id="about" class="about-mf sect-pt4 route">
@@ -163,7 +199,7 @@
     </div>
   </section>
 
-  <div class="section-counter paralax-mf bg-image" style="background-image: url(img/counters-bg.jpg)">
+  <!-- <div class="section-counter paralax-mf bg-image" style="background-image: url(img/counters-bg.jpg)">
     <div class="overlay-mf"></div>
     <div class="container">
       <div class="row d-flex align-items-center justify-content-center">
@@ -202,7 +238,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <!--/ Section Services Star /-->
   <section id="service" class="services-mf route">
@@ -229,7 +265,7 @@
             <div class="service-content">
               <h2 class="s-title">NoteAI</h2>
               <p class="s-description "> 
-                Developed a smart full-stack Notes Application that enables users to efficiently manage notes, generate new ideas, and rewrite content using integrated AI. Built a modern frontend using React and a scalable backend with Django REST API, with support for both OpenAI and LLaMA models to enhance user productivity and creativity.
+                Developed a smart full-stack Notes Application that enables users to efficiently manage notes, generate new ideas, and rewrite content using integrated AI. Built a modern frontend using React and a scalable backend with Django REST API, with support for both OpenAI and LLaMA models to enhance user productivity.
                 <br><br>
                 <span class="mt-2"><b>Tech:</b> React, Django, REST API, LLM</span> 
               </p>
@@ -593,7 +629,7 @@
   <!--/ Section Blog End /-->
 
   <!--/ Section Contact-Footer Star /-->
-  <section class="paralax-mf footer-paralax bg-image sect-mt4 route" style="background-image: url(img/overlay-bg.jpg)">
+  <section class="paralax-mf footer-paralax sect-mt route">
     <div class="overlay-mf"></div>
     <div class="container">
       <div class="row">
@@ -677,7 +713,7 @@
           <div class="col-sm-12">
             <div class="copyright-box">
               <a class="credits text-light" href="">
-                Designed & developed by <u>Ayush Sharma</u>
+                Created by Ayush!
               </a>
             </div>
           </div>
@@ -701,11 +737,472 @@
   <script src="lib/owlcarousel/owl.carousel.min.js"></script>
   <script src="lib/lightbox/js/lightbox.min.js"></script>
   <script src="lib/typed/typed.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+
   <!-- Contact Form JavaScript File -->
   <script src="contactform/contactform.js"></script>
 
   <!-- Template Main Javascript File -->
   <script src="js/main.js"></script>
+  <script>
+    // Custom cursor
+    const cursor = document.querySelector('.cursor');
+    const cursorFollower = document.querySelector('.cursor-follower');
+    const spotlight = document.querySelector('.spotlight');
+    
+    document.addEventListener('mousemove', (e) => {
+        // Position custom cursor
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+        
+        // Position cursor follower with slight delay using CSS transition
+        cursorFollower.style.left = e.clientX + 'px';
+        cursorFollower.style.top = e.clientY + 'px';
+        
+        // Position spotlight
+        spotlight.style.left = e.clientX + 'px';
+        spotlight.style.top = e.clientY + 'px';
+    });
+    
+    // Initialize ParticlesJS with colorful dots and black lines
+    document.addEventListener('DOMContentLoaded', function() {
+        particlesJS('particles-js', {
+            "particles": {
+                "number": {
+                    "value": 100,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": ["#FF9A8B", "#FF6A88", "#65FDF0", "#1D6FA3", "#F9D423", "#FF4E50", "#a17fe0", "#5D26C1"]
+                },
+                "shape": {
+                    "type": "circle",
+                    "stroke": {
+                        "width": 0,
+                    }
+                },
+                "opacity": {
+                    "value": 0.8,
+                    "random": true,
+                    "anim": {
+                        "enable": true,
+                        "speed": 0.5,
+                        "opacity_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "size": {
+                    "value": 4,
+                    "random": true,
+                    "anim": {
+                        "enable": true,
+                        "speed": 2,
+                        "size_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#000000", // Black connection lines
+                    "opacity": 0.4,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 1,
+                    "direction": "none",
+                    "random": true,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                    "attract": {
+                        "enable": true,
+                        "rotateX": 600,
+                        "rotateY": 1200
+                    }
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "repulse"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "repulse": {
+                        "distance": 150,
+                        "duration": 0.4
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    }
+                }
+            },
+            "retina_detect": true
+        });
+    });
 
+    // WebGL background effect
+    class BackgroundEffect {
+        constructor() {
+            this.canvas = document.getElementById('bg-canvas');
+            this.gl = this.canvas.getContext('webgl') || this.canvas.getContext('experimental-webgl');
+            
+            if (!this.gl) {
+                console.error('WebGL not supported');
+                return;
+            }
+            
+            // Initialize properties
+            this.mouse = { x: 0.5, y: 0.5 };
+            this.orbs = document.querySelectorAll('.orb');
+            
+            // Setup events
+            this.setupEvents();
+            
+            // Initialize WebGL
+            this.initGL();
+            
+            // Start animation
+            this.animate();
+        }
+        
+        setupEvents() {
+            // Handle resize
+            window.addEventListener('resize', () => this.resize());
+            this.resize();
+            
+            // Handle mouse movement
+            document.addEventListener('mousemove', (e) => {
+                this.mouse.x = e.clientX / window.innerWidth;
+                this.mouse.y = e.clientY / window.innerHeight;
+                
+                // Apply perspective tilt to the title card
+                const titleCard = document.querySelector('.title-card');
+                const mouseXPercent = (e.clientX / window.innerWidth - 0.5) * 2; // -1 to 1
+                const mouseYPercent = (e.clientY / window.innerHeight - 0.5) * 2; // -1 to 1
+                titleCard.style.transform = `perspective(1000px) rotateX(${-mouseYPercent * 8}deg) rotateY(${mouseXPercent * 8}deg)`;
+                
+                // Move orbs based on mouse position
+                this.moveOrbs(e.clientX, e.clientY);
+            });
+            
+            // Handle touch events for mobile
+            document.addEventListener('touchmove', (e) => {
+                if (e.touches.length > 0) {
+                    const touch = e.touches[0];
+                    this.mouse.x = touch.clientX / window.innerWidth;
+                    this.mouse.y = touch.clientY / window.innerHeight;
+                    
+                    this.moveOrbs(touch.clientX, touch.clientY);
+                }
+            });
+            
+            // Handle button hover effects
+            const buttons = document.querySelectorAll('.nav-button');
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', () => {
+                    // Expand cursor when hovering over buttons
+                    cursorFollower.style.width = '50px';
+                    cursorFollower.style.height = '50px';
+                    button.style.transform = 'translateY(-5px) scale(1.05)';
+                    button.style.boxShadow = '0 15px 25px rgba(0, 0, 0, 0.3)';
+                });
+                
+                button.addEventListener('mouseleave', () => {
+                    // Return cursor to normal size
+                    cursorFollower.style.width = '30px';
+                    cursorFollower.style.height = '30px';
+                    button.style.transform = 'translateY(0) scale(1)';
+                    button.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.2)';
+                });
+            });
+        }
+        
+        moveOrbs(x, y) {
+            // Move orbs based on mouse/touch position with parallax effect
+            this.orbs.forEach((orb, index) => {
+                const speed = (index + 1) * 0.04;
+                const xOffset = ((x / window.innerWidth) - 0.5) * 60 * speed;
+                const yOffset = ((y / window.innerHeight) - 0.5) * 60 * speed;
+                orb.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
+            });
+        }
+        
+        resize() {
+            this.canvas.width = window.innerWidth;
+            this.canvas.height = window.innerHeight;
+            this.gl.viewport(0, 0, this.canvas.width, this.canvas.height);
+        }
+        
+        initGL() {
+            // Vertex shader source
+            const vsSource = `
+                attribute vec4 aVertexPosition;
+                attribute vec2 aTextureCoord;
+                varying vec2 vTextureCoord;
+                void main() {
+                    gl_Position = aVertexPosition;
+                    vTextureCoord = aTextureCoord;
+                }
+            `;
+            
+            // Fragment shader source - simplified for better compatibility
+            const fsSource = `
+                precision mediump float;
+                varying vec2 vTextureCoord;
+                uniform vec2 uResolution;
+                uniform float uTime;
+                uniform vec2 uMouse;
+                
+                // Smooth noise function
+                float noise(vec2 p) {
+                    return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453);
+                }
+                
+                // Smooth noise with interpolation
+                float smoothNoise(vec2 p) {
+                    vec2 i = floor(p);
+                    vec2 f = fract(p);
+                    
+                    // Four corners in 2D of a tile
+                    float a = noise(i);
+                    float b = noise(i + vec2(1.0, 0.0));
+                    float c = noise(i + vec2(0.0, 1.0));
+                    float d = noise(i + vec2(1.0, 1.0));
+                    
+                    // Smooth interpolation
+                    vec2 u = f * f * (3.0 - 2.0 * f);
+                    
+                    return mix(a, b, u.x) +
+                            (c - a) * u.y * (1.0 - u.x) +
+                            (d - b) * u.x * u.y;
+                }
+                
+                void main() {
+                    vec2 uv = vTextureCoord;
+                    
+                    // Create a subtle dark charcoal background
+                    vec3 bgColor = vec3(0.11, 0.11, 0.13);
+                    
+                    // Mouse influence for spotlight effect
+                    float dist = distance(uv, uMouse);
+                    float spotlight = smoothstep(0.4, 0.0, dist) * 0.12;
+                    
+                    // Create layered noise for texture
+                    float t = uTime * 0.1;
+                    float noise1 = smoothNoise((uv + t) * 3.0) * 0.04;
+                    float noise2 = smoothNoise((uv - t * 0.5) * 6.0) * 0.02;
+                    
+                    // Combined noise effect
+                    float pattern = noise1 + noise2;
+                    
+                    // Final color with spotlight
+                    vec3 finalColor = bgColor + vec3(pattern) + vec3(spotlight);
+                    
+                    gl_FragColor = vec4(finalColor, 1.0);
+                }
+            `;
+            
+            // Create shader program
+            this.shaderProgram = this.initShaderProgram(vsSource, fsSource);
+            
+            // Collect all the info needed to use the shader program
+            this.programInfo = {
+                program: this.shaderProgram,
+                attribLocations: {
+                    vertexPosition: this.gl.getAttribLocation(this.shaderProgram, 'aVertexPosition'),
+                    textureCoord: this.gl.getAttribLocation(this.shaderProgram, 'aTextureCoord'),
+                },
+                uniformLocations: {
+                    resolution: this.gl.getUniformLocation(this.shaderProgram, 'uResolution'),
+                    time: this.gl.getUniformLocation(this.shaderProgram, 'uTime'),
+                    mouse: this.gl.getUniformLocation(this.shaderProgram, 'uMouse'),
+                },
+            };
+            
+            // Create buffers
+            this.buffers = this.initBuffers();
+            
+            // Set clear color
+            this.gl.clearColor(0.11, 0.11, 0.13, 1.0); // Matching light charcoal
+        }
+        
+        initShaderProgram(vsSource, fsSource) {
+            const vertexShader = this.loadShader(this.gl.VERTEX_SHADER, vsSource);
+            const fragmentShader = this.loadShader(this.gl.FRAGMENT_SHADER, fsSource);
+            
+            // Create the shader program
+            const shaderProgram = this.gl.createProgram();
+            this.gl.attachShader(shaderProgram, vertexShader);
+            this.gl.attachShader(shaderProgram, fragmentShader);
+            this.gl.linkProgram(shaderProgram);
+            
+            // Check if successful
+            if (!this.gl.getProgramParameter(shaderProgram, this.gl.LINK_STATUS)) {
+                console.error('Unable to initialize the shader program: ' + this.gl.getProgramInfoLog(shaderProgram));
+                return null;
+            }
+            
+            return shaderProgram;
+        }
+        
+        loadShader(type, source) {
+            const shader = this.gl.createShader(type);
+            this.gl.shaderSource(shader, source);
+            this.gl.compileShader(shader);
+            
+            // Check if compilation was successful
+            if (!this.gl.getShaderParameter(shader, this.gl.COMPILE_STATUS)) {
+                console.error('An error occurred compiling the shaders: ' + this.gl.getShaderInfoLog(shader));
+                this.gl.deleteShader(shader);
+                return null;
+            }
+            
+            return shader;
+        }
+        
+        initBuffers() {
+            // Create a buffer for the square's positions.
+            const positionBuffer = this.gl.createBuffer();
+            
+            // Select the positionBuffer as the one to apply buffer operations to
+            this.gl.bindBuffer(this.gl.ARRAY_BUFFER, positionBuffer);
+            
+            // Create an array of positions for the square (full screen quad)
+            const positions = [
+                -1.0,  1.0,
+                 1.0,  1.0,
+                -1.0, -1.0,
+                 1.0, -1.0,
+            ];
+            
+            // Pass the positions to WebGL
+            this.gl.bufferData(this.gl.ARRAY_BUFFER, new Float32Array(positions), this.gl.STATIC_DRAW);
+            
+            // Texture coordinates
+            const textureCoordBuffer = this.gl.createBuffer();
+            this.gl.bindBuffer(this.gl.ARRAY_BUFFER, textureCoordBuffer);
+            
+            const textureCoordinates = [
+                0.0, 0.0,
+                1.0, 0.0,
+                0.0, 1.0,
+                1.0, 1.0,
+            ];
+            
+            this.gl.bufferData(this.gl.ARRAY_BUFFER, new Float32Array(textureCoordinates), this.gl.STATIC_DRAW);
+            
+            return {
+                position: positionBuffer,
+                textureCoord: textureCoordBuffer,
+            };
+        }
+        
+        animate() {
+            // Continue animation
+            requestAnimationFrame(() => this.animate());
+            
+            // Render scene
+            this.render();
+        }
+        
+        render() {
+            // Clear canvas
+            this.gl.clear(this.gl.COLOR_BUFFER_BIT);
+            
+            // Use shader program
+            this.gl.useProgram(this.programInfo.program);
+            
+            // Set uniforms
+            this.gl.uniform2f(this.programInfo.uniformLocations.resolution, this.canvas.width, this.canvas.height);
+            this.gl.uniform1f(this.programInfo.uniformLocations.time, performance.now() / 1000);
+            this.gl.uniform2f(this.programInfo.uniformLocations.mouse, this.mouse.x, 1.0 - this.mouse.y);
+            
+            // Set position attribute
+            {
+                const numComponents = 2; // 2 values per vertex (x,y)
+                const type = this.gl.FLOAT;
+                const normalize = false;
+                const stride = 0;
+                const offset = 0;
+                this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.buffers.position);
+                this.gl.vertexAttribPointer(
+                    this.programInfo.attribLocations.vertexPosition,
+                    numComponents,
+                    type,
+                    normalize,
+                    stride,
+                    offset);
+                this.gl.enableVertexAttribArray(this.programInfo.attribLocations.vertexPosition);
+            }
+            
+            // Set texture coordinate attribute
+            {
+                const numComponents = 2;
+                const type = this.gl.FLOAT;
+                const normalize = false;
+                const stride = 0;
+                const offset = 0;
+                this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.buffers.textureCoord);
+                this.gl.vertexAttribPointer(
+                    this.programInfo.attribLocations.textureCoord,
+                    numComponents,
+                    type,
+                    normalize,
+                    stride,
+                    offset);
+                this.gl.enableVertexAttribArray(this.programInfo.attribLocations.textureCoord);
+            }
+            
+            // Draw the shape
+            {
+                const offset = 0;
+                const vertexCount = 4;
+                this.gl.drawArrays(this.gl.TRIANGLE_STRIP, offset, vertexCount);
+            }
+        }
+    }
+    
+    // Initialize everything when the window is fully loaded
+    window.addEventListener('load', () => {
+        console.log("Window loaded - initializing effects");
+        
+        // Initialize particles.js
+        if (window.particlesJS) {
+            console.log("Initializing particles");
+            // Particle initialization already done in DOMContentLoaded event
+        } else {
+            console.error("particles.js library not loaded");
+        }
+        
+        // Initialize WebGL background
+        try {
+            console.log("Initializing WebGL background");
+            new BackgroundEffect();
+        } catch(e) {
+            console.error("Error initializing WebGL background:", e);
+        }
+        
+        // Hide cursor on touch devices
+        if ('ontouchstart' in window) {
+            document.querySelector('.cursor').style.display = 'none';
+            document.querySelector('.cursor-follower').style.display = 'none';
+            document.querySelector('.spotlight').style.display = 'none';
+            document.body.style.cursor = 'auto';
+        }
+    });
+</script>
 </body>
 </html>
